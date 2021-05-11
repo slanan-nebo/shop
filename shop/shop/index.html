@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!-- Подключаем UIKit по ссылке с api.oneteacher.space -->
+    <link rel="stylesheet" href="css/uikit.min.css">
+</head>
+
+<body>
+
+    <!-- НАЧАЛО: Шапка сайта -->
+    <div class="uk-navbar-container">
+        <div class="uk-container uk-container-large">
+            <nav class="uk-navbar">
+
+                <!-- Логотип (название) -->
+                <div class="uk-navbar-left">
+                    <div class="uk-navbar-item uk-logo uk-text-bold uk-text-danger">
+                        КупиХотьЧто-то!
+                    </div>
+                </div>
+
+                <!-- Корзина -->
+                <div class="uk-navbar-right">
+                    <a href="index.html" class="uk-button uk-button-text uk-margin-right"> Главная</a>
+                    <a href="orders.html" class="uk-button uk-button-text uk-margin-right"> Обратные звонки</a>
+                    <a href="addproduct.html" class="uk-button uk-button-text uk-margin-right"> Добавить товар</a>
+                </div>
+                <div class="uk-navbar-right">
+                    <a href="cart.html" class="uk-button uk-button-danger"><span uk-icon="cart"></span> Корзина</a>
+                </div>
+
+            </nav>
+        </div>
+    </div>
+    <!-- КОНЕЦ: Шапка сайта -->
+
+
+
+
+    <!-- НАЧАЛО: Тело страницы -->
+    <div class="uk-container uk-container-large">
+        <!-- НАЧАЛО: Внешний грид (разделяет на 2 колонки: контент и реклама) -->
+        <div uk-grid class="uk-padding-large uk-padding-remove-horizontal uk-grid-divider">
+
+            <!-- НАЧАЛО: Колонка содержимого (товары + комментарии) -->
+            <div class="uk-width-3-4">
+                <main>
+                    <!-- Заголовок + горизонтальная линия -->
+                    <h2 class="uk-margin-bottom"><span uk-icon="album"></span> Каталог товаров</h2>
+                    <hr class="uk-margin-medium-bottom">
+
+                    <!-- НАЧАЛО: Вложенный грид - сетка карточек товаров -->
+                    <div id="productsContainer" uk-grid="masonry: true" class="uk-child-width-1-3">
+
+                        <!-------------------------------------------------------------------------
+                            НАЧАЛО: Карточка товара 
+                        -------------------------------------------------------------------------->
+                        <div>
+                            <div class="uk-card uk-card-default uk-card-body uk-grid-match">
+                                <h3 class="uk-card-title">
+                                    Ручка 'Owl Mix Color'
+                                </h3>
+                                <img src="https://www.pichshop.ru/product_img/765288/b1.jpg">
+                                <p>                        
+                                    Ручка-сова! С таким другом тебе точно не будет скучно на учёбе и работе :)
+                                </p>
+                                <footer class="uk-flex uk-flex-between">
+                                    <span class="uk-text-large uk-text-bold">150 руб</span>
+                                    <button class="uk-button uk-button-danger cartAddBtn"><span uk-icon="cart"></span></button>
+                                </footer>
+                            </div>
+                        </div>
+                        <!------------------------------------------------------------------------- 
+                            КОНЕЦ: Карточка товара
+                        -------------------------------------------------------------------------->
+
+                        <!-------------------------------------------------------------------------
+                            НАЧАЛО: Карточка товара 
+                        -------------------------------------------------------------------------->
+                        <div>
+                            <div class="uk-card uk-card-default uk-card-body uk-grid-match">
+                                <h3 class="uk-card-title">
+                                    Набор канцелярский 'Space Shuttle'
+                                </h3>
+                                <img src="https://www.pichshop.ru/product_img/364099/b1.jpg">
+                                <p>
+                                    Полноценный канцелярский комплект в виде космического корабля обязательно вызовет
+                                    восторг у любителей космических путешествий!
+                                </p>
+                                <footer class="uk-flex uk-flex-between">
+                                    <span class="uk-text-large uk-text-bold">750 руб</span>
+                                    <button class="uk-button uk-button-danger cartAddBtn"><span uk-icon="cart"></span></button>
+                                </footer>
+                            </div>
+                        </div>
+                        <!------------------------------------------------------------------------- 
+                            КОНЕЦ: Карточка товара
+                        -------------------------------------------------------------------------->
+
+                    </div>
+                    <!-- КОНЕЦ: Вложенный грид - сетка карточек товаров -->
+
+
+
+
+                    <h2 class="uk-margin-bottom"><span uk-icon="comment"></span> Комментарии</h2>
+                    <hr class="uk-margin-medium-bottom">
+
+                    <!------------------------------------------------------------------------- 
+                        НАЧАЛО: Набор полей ввода для ДОБАВЛЕНИЯ КОММЕНТАРИЯ
+                    -------------------------------------------------------------------------->
+                    <input id="commentName" type="text" class="uk-input uk-margin-bottom"
+                        placeholder="Введите Ваше имя">
+                    <textarea id="commaentText" class="uk-textarea uk-margin-bottom"
+                        placeholder="Введите текст комментария"></textarea>
+                    <button id="addComm" class="uk-button uk-button-default uk-margin-medium-bottom"><span
+                            uk-icon="commenting"></span> Отправить комментарий</button>
+                    <!------------------------------------------------------------------------- 
+                        КОНЕЦ: Набор полей ввода для ДОБАВЛЕНИЯ КОММЕНТАРИЯ
+                    -------------------------------------------------------------------------->
+
+
+                    <!------------------------------------------------------------------------- 
+                        НАЧАЛО: Блок, содержащий все комментарии
+                    -------------------------------------------------------------------------->
+                    <div id="commentsContainer">
+
+                        <article class="uk-comment">
+                            <header class="uk-comment-header uk-flex uk-flex-middle">
+                                <div class="uk-width-auto">
+                                    <img class="uk-comment-avatar"
+                                        src="https://robohash.org/%D0%B8%D0%BC%D1%8F%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F"
+                                        width="80" height="80">
+                                </div>
+                                <div class="uk-width-expand">
+                                    <h4 class="uk-comment-title uk-margin-remove">Author</h4>
+                                </div>
+                            </header>
+                            <div class="uk-comment-body">
+                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+                                    tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero
+                                    eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+                                    takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                            </div>
+                        </article>
+
+                    </div>
+                    <!------------------------------------------------------------------------- 
+                        КОНЕЦ: Блок, содержащий все комментарии
+                    -------------------------------------------------------------------------->
+
+                </main>
+            </div>
+            <!-- КОНЕЦ: Колонка содержимого (товары + комментарии) -->
+
+
+
+
+            <!------------------------------------------------------------------------------------- 
+                НАЧАЛО: БОКОВАЯ КОЛОНКА (Оставить заявку на обратный звонок)
+            -------------------------------------------------------------------------------------->
+            <div id="callbackForm" class="uk-width-1-4">
+                <h4>Перезвоните мне</h4>
+                <input id="orderName" type="text" class="uk-input uk-margin-bottom" placeholder="Ваше имя">
+                <input id="orderField" type="text" class="uk-input uk-margin-bottom" placeholder="Ваш телефон">
+                <button id="sendOrderBtn" class="uk-button uk-button-default uk-width-1-1"><span uk-icon="mail"></span>
+                    Отправить
+                    заявку</button>
+            </div>
+            <!------------------------------------------------------------------------------------- 
+                КОНЕЦ: БОКОВАЯ КОЛОНКА (Оставить заявку на обратный звонок)
+            -------------------------------------------------------------------------------------->
+
+
+
+
+        </div>
+        <!-- КОНЕЦ: Внешний грид (разделяет на 2 колонки: контент и реклама) -->
+    </div>
+    <!-- КОНЕЦ: Тело страницы -->
+
+
+
+
+    <!-- Подключение скриптов для UIKit -->
+    <script src="js/uikit.min.js"></script>
+    <script src="js/uikit-icons.min.js"></script>
+
+    <!-- Подключаем HANDLEBARS -->
+    <script src="js/handlebars-v4.1.2.js"></script>
+
+
+
+
+    <!-- Наш скрипт -->
+    <script>
+        'use strict';
+
+
+
+        // ----------------------------------------------------------------------------------------
+        // --- ЗАДАНИЕ 1. -------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------
+
+        // создаем объект запроса для получения списка товаров
+        let xhrLoadProd = new XMLHttpRequest();
+        // настраиваем на отправку методом GET на url, возвращающий json-массив товаров
+        xhrLoadProd.open('GET', 'http://37.77.104.246/api/jsonstorage/?id=424f1d2c58f4ae4f89f0057ebd1bb772', true);
+        xhrLoadProd.send();
+
+        xhrLoadProd.addEventListener('readystatechange', function () {
+            if (xhrLoadProd.readyState == 4 && xhrLoadProd.status == 200) {
+                // преобразуем JSON-ответ в массив
+                let productsArr = JSON.parse(xhrLoadProd.responseText);
+
+                // задаем шаблон для habdlebars.js
+                let templateCode = `
+                    <div>
+                        <div uk-height-match="target" class="uk-card uk-card-default uk-card-body">
+                            <h3 class="uk-card-title">
+                                {{title}}
+                            </h3>
+                            <img src="{{img}}">
+                            <p>
+                                {{description}}
+                            </p>
+                            <footer class="uk-flex uk-flex-between">
+                                <span class="uk-text-large uk-text-bold">{{price}} руб</span>
+                                <button data-price="{{price}}" data-title="{{title}}" class="uk-button uk-button-danger cartAddBtn"><span uk-icon="cart"></span></button>
+                            </footer>
+                        </div>
+                    </div>
+                `;
+
+                // компилируем шаблон
+                let template = Handlebars.compile(templateCode);
+
+                // получаем div, в который будем производить добавление товаров
+                let productsContainer = document.querySelector('#productsContainer');
+
+                // очищаем содержимое контейнера (чтобы удалить примеры товаров, уже заданные в HTML-коде)
+                productsContainer.innerHTML = '';
+
+                // обходим массив товаров, полученный с сервера
+                for (let product of productsArr) {
+                    // рендерим шаблон для текущегоо товара
+                    productsContainer.innerHTML += template(product);
+                }
+                let addarr = document.querySelectorAll(".cartAddBtn");
+                    for(let a of addarr){
+                        a.addEventListener("click",function(e){
+                            let trg = e.currentTarget;
+                            addToCart(trg.dataset.title, trg.dataset.price);
+
+                        })
+                    }
+
+            }
+        });
+        let xhrLoadPro = new XMLHttpRequest();
+        // настраиваем на отправку методом GET на url, возвращающий json-массив товаров
+        xhrLoadPro.open('GET', 'http://37.77.104.246/api/jsonstorage/?id=5862f7220fb3ce60beae114afbf68ae0', true);
+        xhrLoadPro.send();
+        xhrLoadPro.addEventListener('readystatechange', function () {
+            if (xhrLoadPro.readyState == 4 && xhrLoadPro.status == 200) {
+                // преобразуем JSON-ответ в массив
+                let productsArr = JSON.parse(xhrLoadPro.responseText);
+
+                // задаем шаблон для habdlebars.js
+                let templateCode = `
+                        <article class="uk-comment">
+                            <header class="uk-comment-header uk-flex uk-flex-middle">
+                                <div class="uk-width-auto">
+                                    <img class="uk-comment-avatar"
+                                        src="https://robohash.org/%D0%B8%D0%BC%D1%8F%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F"
+                                        width="80" height="80">
+                                </div>
+                                <div class="uk-width-expand">
+                                    <h4 class="uk-comment-title uk-margin-remove">{{author}}</h4>
+                                </div>
+                            </header>
+                            <div class="uk-comment-body">
+                                <p>{{text}}.</p>
+                            </div>
+                        </article>
+                `;
+
+                // компилируем шаблон
+                let template = Handlebars.compile(templateCode);
+
+                // получаем div, в который будем производить добавление товаров
+                let commentsContainer = document.querySelector('#commentsContainer');
+
+                // очищаем содержимое контейнера (чтобы удалить примеры товаров, уже заданные в HTML-коде)
+                commentsContainer.innerHTML = '';
+
+                // обходим массив товаров, полученный с сервера
+                for (let product of productsArr) {
+                    // рендерим шаблон для текущегоо товара
+                    commentsContainer.innerHTML += template(product);
+                }
+                let addarr = document.querySelectorAll(".cartAddBtn");
+                    for(let a of addarr){
+                        a.addEventListener("click",function(e){
+                            let trg = e.currentTarget;
+                            addToComm(trg.dataset.author, trg.dataset.text);
+
+                        })
+                    }
+
+            }
+        });
+        document.querySelector('#addComm').addEventListener('click', function () {
+    // создаем объект запроса для получения текущего списка товаров
+    let xhrLoadPr = new XMLHttpRequest();
+    // настраиваем на отправку методом GET на url, возвращающий json-массив товаров
+    xhrLoadPr.open('GET', 'http://37.77.104.246/api/jsonstorage/?id=5862f7220fb3ce60beae114afbf68ae0',
+        true);
+    xhrLoadPr.send();
+
+    xhrLoadPr.addEventListener('readystatechange', function () {
+        if(xhrLoadPr.readyState == 4 && xhrLoadPr.status == 200){
+            // преобразуем JSON - ответ
+            let productsArr = JSON.parse(xhrLoadPr.responseText);
+
+            //  Создать новый объект по тому же формату, в котором у нас хранятся товары и заполнить его свойства 
+            let newProduct = {
+                author: commentName.value,
+                text: commaentText.value,
+            };
+
+            // добавляем созданный объект в массив товаров
+            productsArr.push(newProduct);
+
+            // формируем новый запрос. Здесь мы будем обновлять содержимое JSON на сервере
+            let xhrSender = new XMLHttpRequest();
+            // для обновления требуется метод PUT
+            xhrSender.open('put', 'http://37.77.104.246/api/jsonstorage/?id=5862f7220fb3ce60beae114afbf68ae0', true);
+
+            // добавляем заголовок к запросу. Данный заголовок обязателен для отправки JSON PUT-запросом
+            xhrSender.setRequestHeader('content-type', 'application/json; charset=utf-8');
+
+            // отправляем запрос с обновленным массивом товаров на сервер, чтобы он его сохранил
+            xhrSender.send(JSON.stringify(productsArr)); // не забудь про JSON.stringify()
+
+            // ответ можно не проверять, но при успешном завершении запроса выведем сообщение пользователю
+            xhrSender.addEventListener('readystatechange', function () {
+                // если запрос завершен ... 
+                if (xhrSender.readyState == 4) {
+                    // и завершен без ошибок
+                    if (xhrSender.status == 200) {
+                        // выведем сообщение о том, что заявка принята
+                        alert('Комментарий успешно добавлен!');
+                    } else {
+                        //а если запрос завершился с ошибкой, выведем сообщение об ошибке
+                        alert('Ошибка отправки. Попробуйте еще раз.');
+                    }
+                }
+            });
+        }
+    });
+});
+        // ----------------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------
+
+
+
+
+        // ----------------------------------------------------------------------------------------
+        // --- ЗАДАНИЕ 3.2. -----------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------
+        // Привяжем функцию отправки заявки на обратный звонок к соответствующей кнопке на странице
+        document.querySelector('#sendOrderBtn').addEventListener('click', function () {
+            // получаем текущий список заявок
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://37.77.104.246/api/jsonstorage/?id=07ac8943e4a9180710f18a81e31aa24f', true);
+            xhr.send();
+
+            xhr.addEventListener('readystatechange', function () {
+                // если запрос завершен и завершен без ошибок, то...
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // преобразуем JSON-ответ в массив
+                    let ordersArr = JSON.parse(xhr.responseText);
+
+                    // сформируем объект новой заявки
+                    let newOrder = {
+                        // значения получаем из соответствующих полей ввода
+                        name: document.querySelector('#orderName').value,
+                        phone: document.querySelector('#orderField').value
+                    }
+                    // добавляем полученный объект заявки в массив заявок, полученный с сервера
+                    ordersArr.push(newOrder);
+
+                    // формируем новый запрос. Здесь мы будем обновлять содержимое JSON на сервере
+                    let xhrSender = new XMLHttpRequest();
+                    // для обновления требуется метод PUT
+                    xhrSender.open('PUT', 'http://37.77.104.246/api/jsonstorage/?id=07ac8943e4a9180710f18a81e31aa24f', true);
+
+                    // добавляем заголовок к запросу. Данный заголовок обязателен для отправки JSON PUT-запросом
+                    xhrSender.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+                    // отправляем запрос с обновленным массивом заявок на сервер, чтобы он его сохранил
+                    xhrSender.send(JSON.stringify(ordersArr));
+
+                    // ответ можно не проверять, но при успешном завершении запроса выведем сообщение пользователю
+                    xhrSender.addEventListener('readystatechange', function () {
+                        // если запрос завершен ... 
+                        if (xhrSender.readyState == 4) {
+                            // и завершен без ошибок
+                            if (xhrSender.status == 200) {
+                                // выведем сообщение о том, что заявка принята
+                                alert('Ваша заявка принята. Оператор скоро свяжется с Вами!');
+                            } else {
+                                //а если запрос завершился с ошибкой, выведем сообщение об ошибке
+                                alert('Ошибка отправки. Попробуйте еще раз.');
+                            }
+                        }
+                    })
+                }
+
+            });
+        });
+
+        // ----------------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------
+
+
+
+
+        // ----------------------------------------------------------------------------------------
+        // --- МЕСТО ДЛЯ ФУНКЦИИ  addToCart -------------------------------------------------------
+        // ----------------------------------------------------------------------------------------
+        function addToCart(title, price){
+            let item = {
+                title:title,
+                price:price
+            }
+            let cart;
+            if("cart" in localStorage){
+                cart = JSON.parse(localStorage.getItem("cart"));
+            }
+            else{
+                cart = [];
+            }
+            cart.push(item);
+            localStorage.setItem("cart",JSON.stringify(cart));
+        }
+        function addToComm(author, text){
+            let item = {
+                author:author,
+                text:text
+            }
+            let comm;
+            if("comm" in localStorage){
+                comm = JSON.parse(localStorage.getItem("comm"));
+            }
+            else{
+                comm = [];
+            }
+            comm.push(item);
+            localStorage.setItem("comm",JSON.stringify(cart));
+        }
+    </script>
+</body>
+
+</html>

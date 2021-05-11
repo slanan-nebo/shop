@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!-- Подключаем UIKit по ссылке с api.oneteacher.space -->
+    <link rel="stylesheet" href="css/uikit.min.css">
+</head>
+
+<body>
+    <!-- НАЧАЛО: Шапка сайта -->
+    <div class="uk-navbar-container">
+        <div class="uk-container uk-container-large">
+            <nav class="uk-navbar">
+
+                <!-- Логотип (название) -->
+                <div class="uk-navbar-left">
+                    <div class="uk-navbar-item uk-logo uk-text-bold uk-text-danger">
+                        КупиХотьЧто-то!
+                    </div>
+                </div>
+
+                <!-- Корзина -->
+                <div class="uk-navbar-right">
+                    <a href="index.html" class="uk-button uk-button-text uk-margin-right"> Главная</a>
+                    <a href="orders.html" class="uk-button uk-button-text uk-margin-right"> Обратные звонки</a>
+                    <a href="addproduct.html" class="uk-button uk-button-text uk-margin-right"> Добавить товар</a>
+                </div>
+                <div class="uk-navbar-right">
+                    <a href="cart.html" class="uk-button uk-button-danger"><span uk-icon="cart"></span> Корзина</a>
+                </div>
+
+            </nav>
+        </div>
+    </div>
+    <!-- КОНЕЦ: Шапка сайта -->
+
+
+
+    <div class="uk-container uk-container-small uk-flex uk-flex-center uk-flex-middle"
+        uk-height-viewport="offset-top: true">
+        <div class="uk-card uk-card-default uk-card-body uk-width-1-1">
+            <h1 class="uk-card-title">Добавить товар</h1>
+            <p>
+                Введите данные о товаре и нажмите кнопку "Добавить"
+            </p>
+
+            <input id="productTitle" type="text" class="uk-input uk-margin-bottom"
+                placeholder="Введите название товара">
+            <input id="productImg" type="text" class="uk-input uk-margin-bottom"
+                placeholder="Введите ссылку на изображение">
+            <textarea id="productDescription" class="uk-textarea uk-margin-bottom"
+                placeholder="Введите описание"></textarea>
+            <input id="productPrice" type="number" class="uk-input uk-margin-bottom" placeholder="Введите цену товара">
+
+            <button id="addProductBtn" class="uk-button uk-button-primary">Добавить</button>
+        </div>
+    </div>
+
+
+
+
+    <!-- Подключение скриптов для UIKit -->
+    <script src="js/uikit.min.js"></script>
+    <script src="js/uikit-icons.min.js"></script>
+
+    <!-- Подключаем HANDLEBARS -->
+    <script src="js/handlebars-v4.1.2.js"></script>
+
+
+    <script>
+           'use strict';
+
+
+// ----------------------------------------------------------------------------------------
+// --- ЗАДАНИЕ 3 --------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
+
+// При нажатии на кнопку "Добавить" мы будем делать следующее...
+document.querySelector('#addProductBtn').addEventListener('click', function () {
+    // создаем объект запроса для получения текущего списка товаров
+    let xhrLoadProd = new XMLHttpRequest();
+    // настраиваем на отправку методом GET на url, возвращающий json-массив товаров
+    xhrLoadProd.open('GET', 'http://37.77.104.246/api/jsonstorage/?id=424f1d2c58f4ae4f89f0057ebd1bb772',
+        true);
+    xhrLoadProd.send();
+
+    xhrLoadProd.addEventListener('readystatechange', function () {
+        if(xhrLoadProd.readyState == 4 && xhrLoadProd.status == 200){
+            // преобразуем JSON - ответ
+            let productsArr = JSON.parse(xhrLoadProd.responseText);
+
+            //  Создать новый объект по тому же формату, в котором у нас хранятся товары и заполнить его свойства 
+            let newProduct = {
+                title: productTitle.value,
+                img: productImg.value,
+                description:  productDescription.value,
+                price:  productPrice.value
+            };
+
+            // добавляем созданный объект в массив товаров
+            productsArr.push(newProduct);
+
+            // формируем новый запрос. Здесь мы будем обновлять содержимое JSON на сервере
+            let xhrSender = new XMLHttpRequest();
+            // для обновления требуется метод PUT
+            xhrSender.open('put', 'http://37.77.104.246/api/jsonstorage/?id=424f1d2c58f4ae4f89f0057ebd1bb772', true);
+
+            // добавляем заголовок к запросу. Данный заголовок обязателен для отправки JSON PUT-запросом
+            xhrSender.setRequestHeader('content-type', 'application/json; charset=utf-8');
+
+            // отправляем запрос с обновленным массивом товаров на сервер, чтобы он его сохранил
+            xhrSender.send(JSON.stringify(productsArr)); // не забудь про JSON.stringify()
+
+            // ответ можно не проверять, но при успешном завершении запроса выведем сообщение пользователю
+            xhrSender.addEventListener('readystatechange', function () {
+                // если запрос завершен ... 
+                if (xhrSender.readyState == 4) {
+                    // и завершен без ошибок
+                    if (xhrSender.status == 200) {
+                        // выведем сообщение о том, что заявка принята
+                        alert('Товар успешно добавлен!');
+                    } else {
+                        //а если запрос завершился с ошибкой, выведем сообщение об ошибке
+                        alert('Ошибка отправки. Попробуйте еще раз.');
+                    }
+                }
+            });
+        }
+    });
+});
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!-- Подключаем UIKit по ссылке с api.oneteacher.space -->
+    <link rel="stylesheet" href="css/uikit.min.css">
+</head>
+
+<body>
+    <!-- НАЧАЛО: Шапка сайта -->
+    <div class="uk-navbar-container">
+        <div class="uk-container uk-container-large">
+            <nav class="uk-navbar">
+
+                <!-- Логотип (название) -->
+                <div class="uk-navbar-left">
+                    <div class="uk-navbar-item uk-logo uk-text-bold uk-text-danger">
+                        КупиХотьЧто-то!
+                    </div>
+                </div>
+
+                <!-- Корзина -->
+                <div class="uk-navbar-right">
+                        <a href="index.html" class="uk-button uk-button-text uk-margin-right"> Главная</a>
+                        <a href="orders.html" class="uk-button uk-button-text uk-margin-right"> Обратные звонки</a>
+                        <a href="addproduct.html" class="uk-button uk-button-text uk-margin-right"> Добавить товар</a>
+                </div>
+                <div class="uk-navbar-right">
+                        <a href="cart.html" class="uk-button uk-button-danger"><span uk-icon="cart"></span> Корзина</a>
+                </div>
+
+            </nav>
+        </div>
+    </div>
+    <!-- КОНЕЦ: Шапка сайта -->
+
+    <!-- НАЧАЛО: Тело страницы -->
+    <div class="uk-container uk-container-large">
+        <table class="uk-table uk-table-divider uk-table-hover">
+            <tr>
+                <td>Имя</td>
+                <td>Телефон</td>
+            </tr>
+            <tbody id="orderLines">
+                <tr>
+                    <td>Имя</td>
+                    <td>Телефон</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- КОНЕЦ: Тело страницы -->
+
+
+
+
+    <!-- Подключение скриптов для UIKit -->
+    <script src="http://api.oneteacher.space/uikit/uikit.min.js"></script>
+    <script src="http://api.oneteacher.space/uikit/uikit-icons.min.js"></script>
+
+    <!-- Подключаем HANDLEBARS -->
+    <script src="js/handlebars-v4.1.2.js"></script>
+
+
+    <!-- Наш скрипт -->
+    <script>
+        'use strict';
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://37.77.104.246/api/jsonstorage/?id=07ac8943e4a9180710f18a81e31aa24f', true);
+    xhr.send();
+
+    xhr.addEventListener('readystatechange', function(){
+    if(xhr.readyState == 4 && xhr.status == 200){
+        let ordersArr = JSON.parse(xhr.responseText);
+
+        let templateCode= `
+            <tr>
+                <td>{{name}}</td>
+                <td>{{phone}}</td>
+            </tr>
+            `;
+        // компилируем шаблон
+        let template = Handlebars.compile(templateCode);
+
+        // получаем контейнер, в который будем производить добавление
+        let ordersContainer = document.querySelector('#orderLines');
+
+        // очищаем содержимое контейнера (чтобы удалить примеры товаров, заданные в HTML)
+        ordersContainer.innerHTML = '';
+
+        // обходим массив товаров
+        for(let order of ordersArr){
+            // рендерим шаблон
+            ordersContainer.innerHTML += template(order);
+        }
+
+
+    }
+});
+    </script>
+</body>
+
+</html>

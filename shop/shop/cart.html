@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!-- Подключаем UIKit по ссылке с api.oneteacher.space -->
+    <link rel="stylesheet" href="css/uikit.min.css">
+</head>
+
+<body>
+    <!-- НАЧАЛО: Шапка сайта -->
+    <div class="uk-navbar-container">
+        <div class="uk-container uk-container-large">
+            <nav class="uk-navbar">
+
+                <!-- Логотип (название) -->
+                <div class="uk-navbar-left">
+                    <div class="uk-navbar-item uk-logo uk-text-bold uk-text-danger">
+                        КупиХотьЧто-то!
+                    </div>
+                </div>
+
+                <!-- Корзина -->
+                <div class="uk-navbar-right">
+                        <a href="index.html" class="uk-button uk-button-text uk-margin-right"> Главная</a>
+                        <a href="orders.html" class="uk-button uk-button-text uk-margin-right"> Обратные звонки</a>
+                        <a href="addproduct.html" class="uk-button uk-button-text uk-margin-right"> Добавить товар</a>
+                </div>
+                <div class="uk-navbar-right">
+                        <a href="cart.html" class="uk-button uk-button-danger"><span uk-icon="cart"></span> Корзина</a>
+                </div>
+
+            </nav>
+        </div>
+    </div>
+    <!-- КОНЕЦ: Шапка сайта -->
+
+    <!-- НАЧАЛО: Тело страницы -->
+    <div class="uk-container uk-container-large">
+        <!-- Заголовок + горизонтальная линия -->
+        <h2 class="uk-margin-bottom uk-margin-large-top">Ваш заказ</h2>
+        <hr class="uk-margin-medium-bottom">
+
+        <table class="uk-table uk-table-divider uk-table-hover">
+            <tr>
+                <td>Название</td>
+                <td>Цена</td>
+            </tr>
+            <tbody id="cartLines"></tbody>
+            <tr>
+                <td>Итого</td>
+                <td id="summary">000</td>
+            </tr>
+        </table>
+    </div>
+    <!-- КОНЕЦ: Тело страницы -->
+
+
+
+
+    <!-- Подключение скриптов для UIKit -->
+    <script src="http://api.oneteacher.space/uikit/uikit.min.js"></script>
+    <script src="http://api.oneteacher.space/uikit/uikit-icons.min.js"></script>
+
+    <!-- Подключаем HANDLEBARS -->
+    <script src="js/handlebars-v4.1.2.js"></script>
+
+
+    <!-- Наш скрипт -->
+    <script>
+        'use strict';
+
+        // преобразуем JSON из localStorage в настоящий массив
+        // localStorage умеет хранить только строки :(((
+        let cartArr = JSON.parse(localStorage.getItem('cart'));
+
+        // задаем шаблон habdlebars.js
+        let templateCode = `
+                    <tr>
+                        <td>{{title}}</td>
+                        <td>{{price}}</td>
+                    </tr>
+                `;
+                // компилируем шаблон
+                let template = Handlebars.compile(templateCode);
+        // компилируем шаблон
+        //let template = ???;
+
+        // получаем контейнер, в который будем производить добавление
+        let rowsContainer = document.querySelector('#cartLines');
+        // очищаем содержимое контейнера
+        rowsContainer.innerHTML = '';
+
+                    let sum=0;
+        // обходим массив корзины
+        for(let item of cartArr){
+            rowsContainer.innerHTML += template(item);
+            sum += parseFloat(item.price);
+        }
+        summary.innerHTML=sum;
+    </script>
+</body>
+
+</html>
