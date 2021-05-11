@@ -1,0 +1,70 @@
+/*progressbar*/
+.progressbar{
+    background-color:cornflowerblue;
+    position:fixed;
+    height: 5px;
+    width: 100vw;
+    margin-top: 12px;
+}
+.progress{
+    background-color:red;
+    height: 5px;
+    width: 0vw;
+}
+
+.activ{
+    text-decoration: underline;
+	color: #E22122;
+}
+.btn{
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    border: solid red 2px;
+    background-color: #EECB33;
+    color:red;
+    position:fixed;
+    text-align: center;
+    display:none;
+    right: 50px;
+    bottom: 50px;
+    transition:5s;
+}
+
+.alert{
+    width: 500px;
+	border-radius: 10px;
+	border: 1px solid black;
+    padding: 25px;
+    display: none;
+}
+.kit_slides_wrapper{
+    display:flex;
+    height: 325px;
+    width: 4000px;
+    transition: 1s;
+}
+.kit_slides_vewport{
+    overflow: hidden;
+    width: 800px;
+}
+.kit_slide{
+    width: 800px;
+}
+
+.load{
+    top: 0px;
+    left: 0px;
+    z-index: 10000;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: cornflowerblue;
+}
+.ps{
+    height: 10vh;
+    width:10vw;
+    margin-left: 45vw;
+    margin-top:45vh;
+    transition: 0.5s;
+}
